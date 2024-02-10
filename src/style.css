@@ -1,4 +1,159 @@
 * {
     padding: 0;
     margin: 0;
+    font-family: sans-serif;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(0, 10px);
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+body {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 20px;
+    background: rgb(62, 130, 173);
+    margin-bottom: 50px;
+    color: white;
+}
+
+input {
+    border: 2px solid black;
+    border-radius: 20px;
+    font-size: 1rem;
+    width: 250px;
+    padding: 5px;
+    padding-left: 10px;
+    color: black;
+    border: 0;
+}
+
+.forecastStats {
+    display: flex;
+    flex-direction: column;
+}
+
+.today {
+    display: flex;
+    justify-content: center;
+}
+
+.currentStats {
+    width: 200px;
+    text-align: center;
+    margin: 10px;
+    background: rgb(62, 130, 173);
+    border-radius: 20px;
+    color: white;
+    padding: 25px;
+}
+
+.currentStats>* {
+    padding: 10px;
+}
+
+.currentStats h4 {
+   /* border-bottom: 1px solid black;*/
+}
+
+#locationDiv {
+    text-align: center;
+}
+
+h1 {
+    font-size: 4rem;
+}
+
+h4 {
+    font-size: 2rem;
+}
+
+h5 {
+    font-size: 1rem;
+    font-weight: lighter;
+}
+
+.fadeIn {
+    animation: fadeIn 900ms cubic-bezier(0, 0.54, 0.08, 0.99);
+}
+
+.conditionIcon {
+    width: 64px;
+}
+
+#logo {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-size: 2rem;
+    font-weight: bolder;
+}
+
+#toggle {
+    position: absolute;
+    top: 20px;
+    right: 15px;
+    display: flex;
+    justify-content: space-between;
+    width: 100px;
+    height: 25px;
+    background: rgb(26, 68, 119);
+    border-radius: 20px;
+}
+
+#toggle:hover {
+    cursor: pointer;
+}
+
+#toggleSwitch {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: 25px;
+    z-index: 500;
+    border-radius: 20px;
+    background: rgb(220, 145, 55);
+    border: 2px solid white;
+    box-sizing: border-box;
+    transition: 500ms ease-in-out;
+}
+
+
+.switchHalf {
+    width: 50px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.farenheit {
+    transform: translate(100%, 0);
+}
+
+#toggle p {
+    position: relative;
+    z-index: 10000;
+    width: auto;
+    padding: 5px;
+}
+
+.error {
+    color: red;
 }

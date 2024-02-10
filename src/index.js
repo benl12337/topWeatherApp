@@ -1,22 +1,36 @@
 import './style.css';
+import getWeatherObject from './getWeatherObject.js';
 
-async function getWeather(searchTerm) {
+// querying the required elements
+const form = document.querySelector('form');
+const input = document.querySelector('input');
+const toggle = document.querySelector('#toggle');
+const toggleSwitch = document.querySelector('#toggleSwitch');
 
-    //const fetchLink = 'http://api.weatherapi.com/v1/current.json?key=cf257d4d214f44b6993120155240402&q=' + searchTerm;
-    const fetchLink = 'http://api.weatherapi.com/v1/forecast.json?key=cf257d4d214f44b6993120155240402&q=' + searchTerm + '&days=3';
+let metric = 'celsius';
 
-    try {
-        const response = await fetch(fetchLink, {mode: 'cors'});
-        const weatherData = await response.json();
-        console.log(weatherData);
-        console.log(weatherData.location.name, weatherData.location.country);
-    
-        return weatherData;
-    } catch (err) {
-        console.error(err);
-    }
-}
+// listen for form submission
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
 
-getWeather('london');
+    // clean up the input value
+
+    // get the weather object
+    getWeatherObject(input.value, metric);
+});
+
+toggle.addEventListener('click', ()=>{
+    console.log('yayysdfh');
+    toggleSwitch.classList.toggle('farenheit');
+    metric = metric == 'celsius' ? 'farenheit' : 'celsius';
+    // add some logic to alter measurements
+    // console.log(toggleSwitch.classList);
+    getWeatherObject(input.value, metric);
+});
+
+
+
+
+
 
 
