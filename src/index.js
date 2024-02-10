@@ -22,7 +22,7 @@ form.addEventListener('submit', (e) => {
 toggle.addEventListener('click', ()=>{
     console.log('yayysdfh');
     toggleSwitch.classList.toggle('farenheit');
-    metric = metric == 'celsius' ? 'farenheit' : 'celsius';
+    metric = metric == 'celsius' ? 'fahrenheit' : 'celsius';
     // add some logic to alter measurements
     // console.log(toggleSwitch.classList);
     getWeatherObject(input.value, metric);

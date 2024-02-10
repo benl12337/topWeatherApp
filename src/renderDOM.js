@@ -1,21 +1,13 @@
+import stat from './stat.js';
+import resetContents from './resetContents.js';
+import statTitle from './statTitle.js';
+import forecastCard from './forecastCard.js'
+
 export default function renderDOM(weatherObject, iconObject, metric) {
 
+    console.log(weatherObject);
 
-    // reset the weather contents
-    const weatherContent = document.getElementById('weatherContent');
-    weatherContent.innerHTML = `<div id="locationDiv"></div>
-    <img id="locationCondition src="">
-    <div class="today">
-        <div id = "statsOne"  class="currentStats"></div>
-        <div id = "statsTwo"  class="currentStats"></div>
-        <div id = "statsThree"  class="currentStats"></div>
-    </div>
-    <div class="forecast">
-        <div id = "forecastOne" class="forecastStats"></div>
-        <div id = "forecastTwo" class="forecastStats"></div>
-        <div id = "forecastThree" class="forecastStats"></div>
-    </div>`;
-
+    resetContents();
     // query relevant divs
     const location = document.getElementById('locationDiv');
 
@@ -40,30 +32,27 @@ export default function renderDOM(weatherObject, iconObject, metric) {
     location.appendChild(conditionIcon);
 
     // render wind stats 
-    const statsOne = document.getElementById('statsOne');[]
-    const windSpeed = document.createElement('h4');
-    const windTitle = document.createElement('h5');
-    windSpeed.textContent = metric == 'celsius' ? (weatherObject.current.wind_kph + ' km/h') : (weatherObject.current.wind_mph + ' mph');
-    windTitle.textContent = 'WIND';
-    statsOne.appendChild(windSpeed);
-    statsOne.appendChild(windTitle);
+    const statsOne = document.getElementById('statsOne');
+    statsOne.appendChild(stat(metric, 'wind', weatherObject, ' km/h', ' mph'));
+    statsOne.appendChild(statTitle('WIND'));
 
     // render temp stats
     const statsTwo = document.getElementById('statsTwo');
-    const temp = document.createElement('h4');
-    const tempTitle = document.createElement('h5');
-    temp.textContent = metric == 'celsius' ? (weatherObject.current.feelslike_c + ' °c') : (weatherObject.current.feelslike_f) + ' °f';
-    tempTitle.textContent = 'FEELS LIKE';
-    statsTwo.appendChild(temp);
-    statsTwo.appendChild(tempTitle);
+    statsTwo.appendChild(stat(metric, 'temp', weatherObject, ' °c', ' °f'));
+    statsTwo.appendChild(statTitle('FEELS LIKE'));
 
-    // render temp stats
+    // render precip stats
     const statsThree = document.getElementById('statsThree');
-    const precip = document.createElement('h4');
-    const precipTitle = document.createElement('h5');
-    precip.textContent = metric == 'celsius' ? (weatherObject.current.precip_mm + ' mm') : (weatherObject.current.precip_in + ' in');
-    precipTitle.textContent = 'PRECIPITATION';
-    statsThree.appendChild(precip);
-    statsThree.appendChild(precipTitle);
+    statsThree.appendChild(stat(metric, 'precip', weatherObject, ' mm', ' in'));
+    statsThree.appendChild(statTitle('PRECIPITATION'));
 
+    // render forecast
+    console.log('got up to checkpoint 1');
+    const forecastObject = weatherObject.forecast.forecastday;
+    const forecastDiv = document.querySelector('#forecast');
+    console.log('got up to checkpoint two');
+
+    forecastDiv.appendChild(forecastCard(forecastObject[0].day.maxtemp_c, forecastObject[0].day.mintemp_c, 'forecastOne'));
+    forecastDiv.appendChild(forecastCard(forecastObject[1].day.maxtemp_c, forecastObject[1].day.mintemp_c, 'forecastTwo'));
+    forecastDiv.appendChild(forecastCard(forecastObject[2].day.maxtemp_c, forecastObject[2].day.mintemp_c, 'forecastThree'));
 };

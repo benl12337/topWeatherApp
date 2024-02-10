@@ -57,9 +57,9 @@ input {
     width: 200px;
     text-align: center;
     margin: 10px;
-    background: rgb(62, 130, 173);
+    /*background: rgb(62, 130, 173);*/
     border-radius: 20px;
-    color: white;
+    /*color: white;*/
     padding: 25px;
 }
 
@@ -68,7 +68,7 @@ input {
 }
 
 .currentStats h4 {
-   /* border-bottom: 1px solid black;*/
+    border-bottom: 1px solid white;
 }
 
 #locationDiv {
@@ -156,4 +156,17 @@ h5 {
 
 .error {
     color: red;
+}
+
+#forecast {
+    width: 25%;
+    background: lightlbue;
+    opacity: 0.5;
+    display: flex;
+    justify-content: space-between;
+}
+
+.forecastCard {
+    display: flex;
+    flex-direction: column;
 }

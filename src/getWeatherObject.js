@@ -5,7 +5,6 @@ export default async function getWeatherObject(searchTerm, metric) {
     const fetchLink = 'http://api.weatherapi.com/v1/forecast.json?key=cf257d4d214f44b6993120155240402&q=' + searchTerm + '&days=3';
 
     try {
-
         // fetch the weather object
         const response = await fetch(fetchLink, { mode: 'cors' });
         const weatherObject = await response.json();
@@ -26,6 +25,5 @@ export default async function getWeatherObject(searchTerm, metric) {
         errorMessage.textContent = 'Location not found. Please enter a valid location.'
         errorMessage.classList.add('error');
         weatherContent.appendChild(errorMessage);
-
     }
 };
