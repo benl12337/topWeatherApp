@@ -4,17 +4,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>WTHR.</title>
 </head>
 
 <body>
 
     <div class="header">
-        <div class="toggle"></div>
+
+        <div id="logo" class="h2">WTHR.</div>
+
+        <form>
+            <input type="text" required>
+        </form>
+
+        <div id="toggle">
+            <div id="toggleSwitch"></div>
+            <div class="switchHalf">
+                <p>°C</p>
+            </div>
+            <div class="switchHalf">
+                <p>°F</p>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div id="weatherContent">
     </div>
 
 
 </body>
 <script src="bundle.js"></script>
-
 </html>
