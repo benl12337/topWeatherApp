@@ -7,12 +7,24 @@ export default function forecastCard(index, forecastObject, metric, cardId) {
     const maxTempEl = document.createElement('p');
     const minTempEl = document.createElement('p');
 
-    day.textContent = format(new Date(forecastObject[index].date), 'EEEE');
-    console.log(day);
+    if (index == 0) {
+        day.textContent = 'Today';
+    } else if (index == -1) {
+        day.textContent = 'Forecast';
+    } else {
+        day.textContent = format(new Date(forecastObject[index].date), 'EEEE');
+    }
     day.className = 'forecastName';
-    maxTempEl.textContent = metric == 'celsius' ? (forecastObject[index].day.maxtemp_c + ' °c') : (forecastObject[index].day.maxtemp_f + ' °f');
+
+    if (index == -1) {
+        maxTempEl.textContent = 'MAX';
+        minTempEl.textContent = 'MIN';
+    } else {
+        maxTempEl.textContent = metric == 'celsius' ? (forecastObject[index].day.maxtemp_c + ' °c') : (forecastObject[index].day.maxtemp_f + ' °f');
+        minTempEl.textContent = metric == 'celsius' ? (forecastObject[index].day.mintemp_c + ' °c') : (forecastObject[index].day.mintemp_f + ' °f');
+    }
+
     maxTempEl.className = 'maxTemp';
-    minTempEl.textContent = metric == 'celsius' ? (forecastObject[index].day.mintemp_c + ' °c') : (forecastObject[index].day.mintemp_f + ' °f');
     minTempEl.className = 'minTemp';
     div.id = cardId;
     div.className = 'forecastCard';

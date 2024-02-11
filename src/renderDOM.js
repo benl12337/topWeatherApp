@@ -66,11 +66,18 @@ export default function renderDOM(weatherObject, iconObject, metric, animation) 
 
     // render forecast
     console.log('got up to checkpoint 1');
+    const forecastContainer= document.createElement('div');
+    forecastContainer.className = 'forecastContainer';
+    
     const forecastObject = weatherObject.forecast.forecastday;
     const forecastDiv = document.querySelector('#forecast');
     console.log('got up to checkpoint two');
 
-    forecastDiv.appendChild(forecastCard(0, forecastObject, metric, 'forecastOne'));
-    forecastDiv.appendChild(forecastCard(1, forecastObject, metric, 'forecastTwo'));
-    forecastDiv.appendChild(forecastCard(2, forecastObject, metric, 'forecastThree'));
+
+    forecastContainer.appendChild(forecastCard(-1, forecastObject, metric, 'forecastNeg'));
+    forecastContainer.appendChild(forecastCard(0, forecastObject, metric, 'forecastOne'));
+    forecastContainer.appendChild(forecastCard(1, forecastObject, metric, 'forecastTwo'));
+    forecastContainer.appendChild(forecastCard(2, forecastObject, metric, 'forecastThree'));
+
+    forecastDiv.appendChild(forecastContainer);
 };
