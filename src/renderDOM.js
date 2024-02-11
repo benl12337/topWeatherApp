@@ -40,7 +40,7 @@ export default function renderDOM(weatherObject, iconObject, metric, animation) 
     // get the icon code
     iconObject.forEach((object) => {
         if (object.code == weatherObject.current.condition.code) {
-            conditionIcon.src = `icons/${iconFolder}/${object.icon}.png`;
+            conditionIcon.src = `./icons/${iconFolder}/${object.icon}.png`;
         };
     });
 
