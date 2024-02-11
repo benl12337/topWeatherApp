@@ -1,9 +1,12 @@
 import stat from './stat.js';
 import resetContents from './resetContents.js';
-import statTitle from './statTitle.js';
-import forecastCard from './forecastCard.js'
+import statIcon from './statIcon.js';
+import forecastCard from './forecastCard.js';
+import windImg from './wind.png';
+import rainImg from './drop.png';
+import tempImg from './temperature.png';
 
-export default function renderDOM(weatherObject, iconObject, metric) {
+export default function renderDOM(weatherObject, iconObject, metric, animation) {
 
     console.log(weatherObject);
 
@@ -15,13 +18,25 @@ export default function renderDOM(weatherObject, iconObject, metric) {
     const locationText = document.createElement('h1');
     locationText.textContent = weatherObject.location.name + ', ' + weatherObject.location.country;
     location.appendChild(locationText);
-    locationText.classList.add('fadeIn');
+    if (animation) {
+        locationText.classList.add('fadeIn');
+    }
 
-    // append the current icon
+    // append the current weather condition
+    const conditions = document.createElement('div');
+    conditions.className = 'conditions';
+
     const iconFolder = weatherObject.current.is_day == 1 ? 'day' : 'night';
     const iconNumber = weatherObject.current.condition.code;
     const conditionIcon = document.createElement('img');
     conditionIcon.classList.add('conditionIcon');
+
+    const conditionsText = document.createElement('p');
+    conditionsText.className = 'conditionStatus';
+    conditionsText.textContent = weatherObject.current.condition.text;
+
+
+
     // get the icon code
     iconObject.forEach((object) => {
         if (object.code == weatherObject.current.condition.code) {
@@ -29,22 +44,25 @@ export default function renderDOM(weatherObject, iconObject, metric) {
         };
     });
 
-    location.appendChild(conditionIcon);
+    // APPEND conditions TO DIV
+    conditions.appendChild(conditionIcon);
+    conditions.appendChild(conditionsText);
+    location.appendChild(conditions);
 
     // render wind stats 
     const statsOne = document.getElementById('statsOne');
     statsOne.appendChild(stat(metric, 'wind', weatherObject, ' km/h', ' mph'));
-    statsOne.appendChild(statTitle('WIND'));
+    statsOne.appendChild(statIcon(windImg));
 
     // render temp stats
     const statsTwo = document.getElementById('statsTwo');
     statsTwo.appendChild(stat(metric, 'temp', weatherObject, ' °c', ' °f'));
-    statsTwo.appendChild(statTitle('FEELS LIKE'));
+    statsTwo.appendChild(statIcon(tempImg));
 
     // render precip stats
     const statsThree = document.getElementById('statsThree');
     statsThree.appendChild(stat(metric, 'precip', weatherObject, ' mm', ' in'));
-    statsThree.appendChild(statTitle('PRECIPITATION'));
+    statsThree.appendChild(statIcon(rainImg));
 
     // render forecast
     console.log('got up to checkpoint 1');
@@ -52,7 +70,7 @@ export default function renderDOM(weatherObject, iconObject, metric) {
     const forecastDiv = document.querySelector('#forecast');
     console.log('got up to checkpoint two');
 
-    forecastDiv.appendChild(forecastCard(forecastObject[0].day.maxtemp_c, forecastObject[0].day.mintemp_c, 'forecastOne'));
-    forecastDiv.appendChild(forecastCard(forecastObject[1].day.maxtemp_c, forecastObject[1].day.mintemp_c, 'forecastTwo'));
-    forecastDiv.appendChild(forecastCard(forecastObject[2].day.maxtemp_c, forecastObject[2].day.mintemp_c, 'forecastThree'));
+    forecastDiv.appendChild(forecastCard(0, forecastObject, metric, 'forecastOne'));
+    forecastDiv.appendChild(forecastCard(1, forecastObject, metric, 'forecastTwo'));
+    forecastDiv.appendChild(forecastCard(2, forecastObject, metric, 'forecastThree'));
 };

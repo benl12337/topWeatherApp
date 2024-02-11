@@ -1,3 +1,7 @@
+html {
+    background: rgb(62, 130, 173);
+}
+
 * {
     padding: 0;
     margin: 0;
@@ -7,11 +11,25 @@
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translate(0, 10px);
+        transform: translate(0, 30px);
     }
 
     to {
         opacity: 1;
+    }
+}
+
+@keyframes scaleLoad {
+    0% {
+        transform: scale(0,0);
+    }
+
+    50% {
+        transform: scale(0.5,0.5);
+    }
+
+    100% {
+        transform: scale(0,0);
     }
 }
 
@@ -24,11 +42,10 @@ body {
 
 .header {
     display: flex;
+    box-sizing: border-box;
     justify-content: center;
     width: 100%;
     padding: 20px;
-    background: rgb(62, 130, 173);
-    margin-bottom: 50px;
     color: white;
 }
 
@@ -57,18 +74,13 @@ input {
     width: 200px;
     text-align: center;
     margin: 10px;
-    /*background: rgb(62, 130, 173);*/
     border-radius: 20px;
-    /*color: white;*/
     padding: 25px;
+    background: rgba(0, 0, 0, 0.1);
 }
 
 .currentStats>* {
     padding: 10px;
-}
-
-.currentStats h4 {
-    border-bottom: 1px solid white;
 }
 
 #locationDiv {
@@ -143,7 +155,7 @@ h5 {
     align-items: center;
 }
 
-.farenheit {
+.fahrenheit {
     transform: translate(100%, 0);
 }
 
@@ -155,18 +167,74 @@ h5 {
 }
 
 .error {
-    color: red;
+    color: rgb(252, 191, 191);
 }
 
 #forecast {
-    width: 25%;
+    width: 100%;
     background: lightlbue;
     opacity: 0.5;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .forecastCard {
     display: flex;
+    width: 75px;
     flex-direction: column;
+    margin: 25px;
+    text-align: center;
+}
+
+#weatherContent {
+    padding-top: 50px;
+    width: 100%;
+    height: auto;
+    color: white;
+    text-align: center;
+}
+
+.maxTemp {
+    color: white;
+}
+
+.minTemp {
+    color: white;
+}
+
+.weatherIcon {
+    filter: invert(1);
+}
+
+.conditions {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.conditionStatus {
+    font-weight: lighter;
+    font-style: italic;
+}
+
+.loadingObject {
+    transform: scale(0,0);
+    margin: 10px;
+    animation: scaleLoad 1s ease-in-out;
+    animation-iteration-count: infinite;
+}
+
+.loadingObject1 {
+    animation-delay: 0ms;
+}
+
+.loadingObject2 {
+    animation-delay: 100ms;
+
+}
+
+.loadingObject3 {
+    animation-delay: 200ms;
+
 }
