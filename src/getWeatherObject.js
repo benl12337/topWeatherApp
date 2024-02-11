@@ -3,7 +3,7 @@ import loadAnimation from './loadAnimation.js';
 
 export default async function getWeatherObject(searchTerm, metric, animation) {
 
-    const fetchLink = 'http://api.weatherapi.com/v1/forecast.json?key=cf257d4d214f44b6993120155240402&q=' + searchTerm + '&days=3';
+    const fetchLink = 'https://api.weatherapi.com/v1/forecast.json?key=cf257d4d214f44b6993120155240402&q=' + searchTerm + '&days=3';
 
     try {
 
